@@ -1,0 +1,31 @@
+AllCops:
+  Include:
+    - Rakefile
+    - config.ru
+  Exclude:
+    - db/**
+    - config/**
+    - script/**
+    - spec/**
+  TargetRubyVersion: 2.4
+Documentation:
+  Enabled: false
+
+# Style
+Style/EmptyLineAfterMagicComment:
+  Enabled: false
+Style/MultilineMethodCallBraceLayout:
+  EnforcedStyle: same_line
+Style/ClassAndModuleChildren:
+  Enabled: false
+Style/PercentLiteralDelimiters:
+  Enabled: false
+Style/WordArray:
+  enabled: false
+# Metrics
+Metrics/LineLength:
+  Max: 110
+Metrics/ClassLength:
+  Max: 140
+Metrics/AbcSize:
+  Max: 17
