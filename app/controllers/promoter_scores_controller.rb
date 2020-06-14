@@ -4,7 +4,9 @@ class PromoterScoresController < ApplicationController
     render json: { promoter_score: promoter_score }, status: :created
   rescue ActiveRecord::RecordInvalid, ActiveRecord::NotNullViolation => e
     render json: { error: e }, status: :bad_request
-  rescue Agents::ValidateAgentPresence::AgentNotPresent, Respondents::ValidateRespondentPresence::RespondentNotPresent => e
+  rescue Agents::ValidateAgentPresence::AgentNotPresent,
+      Respondents::ValidateRespondentPresence::RespondentNotPresent,
+      SellingTransactions::ValidateSellingTransactionPresence::SellingTransactionNotPresent => e
     render json: { error: e.message }, status: :bad_request
   end
 

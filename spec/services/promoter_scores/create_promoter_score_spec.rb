@@ -16,12 +16,14 @@ RSpec.describe PromoterScores::CreatePromoterScore do
     allow(PromoterScore).to receive(:create!).and_return(valid_params)
     allow(Agents::ValidateAgentPresence).to receive(:call).and_return(true)
     allow(Respondents::ValidateRespondentPresence).to receive(:call).and_return(true)
+    allow(SellingTransactions::ValidateSellingTransactionPresence).to receive(:call).and_return(true)
   }
 
   it 'call create! on the PromoterScore' do
     expect(PromoterScore).to receive(:create!)
     expect(Agents::ValidateAgentPresence).to receive(:call)
     expect(Respondents::ValidateRespondentPresence).to receive(:call)
+    expect(SellingTransactions::ValidateSellingTransactionPresence).to receive(:call)
     described_class.call({})
   end
 end
