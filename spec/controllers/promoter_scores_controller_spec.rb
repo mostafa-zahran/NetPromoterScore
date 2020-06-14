@@ -58,12 +58,12 @@ RSpec.describe PromoterScoresController do
 
       it 'has no respondent_id' do
         test_value_not_present(:respondent_id)
-        expect(json_response[:error]).to eql("Validation failed: Respondent can't be blank")
+        expect(json_response[:error]).to eql("Respondent not found")
       end
 
       it 'has no respondent_class' do
         test_value_not_present(:respondent_class)
-        expect(json_response[:error]).to eql("Validation failed: Respondent class can't be blank")
+        expect(json_response[:error]).to eql("Respondent not found")
       end
     end
   end
