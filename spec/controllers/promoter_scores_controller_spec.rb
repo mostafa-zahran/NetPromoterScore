@@ -30,9 +30,9 @@ RSpec.describe PromoterScoresController do
 
     context "fail" do
       def test_value_not_present(attribute)
-        no_attribute_params = valid_params.deep_dup
-        no_attribute_params.fetch(:promoter_score).delete(attribute)
-        post :create, params: no_attribute_params
+        old_value = valid_params.fetch(:promoter_score).delete(attribute)
+        post :create, params: valid_params
+        valid_params[attribute] = old_value
         expect(response.code).to eql('400')
       end
 
@@ -48,22 +48,22 @@ RSpec.describe PromoterScoresController do
 
       it 'has no object_class' do
         test_value_not_present(:object_class)
-        expect(json_response[:error]).to eql("Validation failed: Object class can't be blank")
+        expect(json_response[:error]).to eql("Object not found")
       end
 
       it 'has no object_id' do
         test_value_not_present(:object_id)
-        expect(json_response[:error]).to eql("Validation failed: Object can't be blank")
+        expect(json_response[:error]).to eql("Object not found")
       end
 
       it 'has no respondent_id' do
         test_value_not_present(:respondent_id)
-        expect(json_response[:error]).to eql("Validation failed: Respondent can't be blank")
+        expect(json_response[:error]).to eql("Respondent not found")
       end
 
       it 'has no respondent_class' do
         test_value_not_present(:respondent_class)
-        expect(json_response[:error]).to eql("Validation failed: Respondent class can't be blank")
+        expect(json_response[:error]).to eql("Respondent not found")
       end
     end
   end

@@ -26,19 +26,19 @@ RSpec.describe PromoterScore, type: :model do
       end
 
       it "has no object_id" do
-        expect { create(:promoter_score, object_id: nil) }.to raise_error(ActiveRecord::NotNullViolation)
+        expect { create(:promoter_score, object_id: nil) }.to raise_error(ActiveRecord::RecordInvalid)
       end
 
       it "has no object_class" do
-        expect { create(:promoter_score, object_class: nil) }.to raise_error(ActiveRecord::NotNullViolation)
+        expect { create(:promoter_score, object_class: nil) }.to raise_error(ActiveRecord::RecordInvalid)
       end
 
       it "has no respondent_class" do
-        expect { create(:promoter_score, respondent_class: nil) }.to raise_error(ActiveRecord::NotNullViolation)
+        expect { create(:promoter_score, respondent_class: nil) }.to raise_error(ActiveRecord::RecordInvalid)
       end
 
       it "has no respondent_id" do
-        expect { create(:promoter_score, respondent_id: nil) }.to raise_error(ActiveRecord::NotNullViolation)
+        expect { create(:promoter_score, respondent_id: nil) }.to raise_error(ActiveRecord::RecordInvalid)
       end
 
       it "has no touchpoint" do
