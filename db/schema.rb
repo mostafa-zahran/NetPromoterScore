@@ -10,18 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 2020_06_14_081708) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "addresses", id: :serial, force: :cascade do |t|
-    t.text "name"
-  end
-
-  create_table "users", id: :serial, force: :cascade do |t|
-    t.text "usr_name"
-    t.integer "addresses_id"
+  create_table "promoter_scores", force: :cascade do |t|
+    t.integer "score", null: false
+    t.string "touchpoint", null: false
+    t.string "respondent_class", null: false
+    t.integer "respondent_id", null: false
+    t.string "object_class", null: false
+    t.integer "object_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["object_class", "object_id"], name: "index_promoter_scores_on_object_class_and_object_id"
+    t.index ["respondent_class", "respondent_id"], name: "index_promoter_scores_on_respondent_class_and_respondent_id"
   end
 
 end
