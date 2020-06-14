@@ -9,7 +9,7 @@ RSpec.describe PromoterScore, type: :model do
 
   describe "ALLOWED_SCORES" do
     it "have a certain values" do
-      expect(PromoterScore::ALLOWED_SCORES).to eq((-1..9).to_a)
+      expect(PromoterScore::ALLOWED_SCORES).to eq((-1..10).to_a)
     end
   end
 
