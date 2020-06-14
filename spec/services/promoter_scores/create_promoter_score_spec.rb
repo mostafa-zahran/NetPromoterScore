@@ -13,17 +13,30 @@ RSpec.describe PromoterScores::CreatePromoterScore do
   }
 
   before {
-    allow(PromoterScore).to receive(:create!).and_return(valid_params)
+    allow(PromoterScore).to receive(:create!)
     allow(Agents::ValidateAgentPresence).to receive(:call).and_return(true)
     allow(Respondents::ValidateRespondentPresence).to receive(:call).and_return(true)
     allow(SellingTransactions::ValidateSellingTransactionPresence).to receive(:call).and_return(true)
   }
 
-  it 'call create! on the PromoterScore' do
-    expect(PromoterScore).to receive(:create!)
+  it 'perform validations' do
     expect(Agents::ValidateAgentPresence).to receive(:call)
     expect(Respondents::ValidateRespondentPresence).to receive(:call)
     expect(SellingTransactions::ValidateSellingTransactionPresence).to receive(:call)
     described_class.call({})
+  end
+
+  it "creates if object not found" do
+    allow(PromoterScores::FindPromoterScore).to receive(:call).and_return(nil)
+    expect(PromoterScore).to receive(:create!).with(valid_params)
+    described_class.call(valid_params)
+  end
+
+  it "updates score if object is found" do
+    promoter_score = create(:promoter_score)
+    allow(promoter_score).to receive(:update_attributes)
+    allow(PromoterScores::FindPromoterScore).to receive(:call).and_return(promoter_score)
+    expect(promoter_score).to receive(:update_attributes).with({score: valid_params[:score]})
+    described_class.call(valid_params)
   end
 end

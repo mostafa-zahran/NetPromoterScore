@@ -3,7 +3,8 @@ class PromoterScores::CreatePromoterScore
     Agents::ValidateAgentPresence.call(agent_params(params))
     Respondents::ValidateRespondentPresence.call(respondent_params(params))
     SellingTransactions::ValidateSellingTransactionPresence.call(selling_transaction_params(params))
-    PromoterScore.create!(params)
+    promoter_score = PromoterScores::FindPromoterScore.call(selling_transaction_params(params))
+    promoter_score ? update_score(promoter_score, params[:score]) : create_promoter_score(params)
   end
 
   def self.agent_params(params)
@@ -19,7 +20,16 @@ class PromoterScores::CreatePromoterScore
         object_id: params[:object_id],
         object_class: params[:object_class],
         respondent_id: params[:respondent_id],
-        respondent_class: params[:respondent_class]
+        respondent_class: params[:respondent_class],
+        touchpoint: params[:touchpoint]
     }
+  end
+
+  def self.create_promoter_score(params)
+    PromoterScore.create!(params)
+  end
+
+  def self.update_score(promoter_score, score)
+    promoter_score.update_attributes(score: score)
   end
 end

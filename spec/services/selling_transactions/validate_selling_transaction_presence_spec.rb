@@ -6,7 +6,8 @@ RSpec.describe SellingTransactions::ValidateSellingTransactionPresence do
         object_class: 'object_class',
         object_id: Faker::Number.non_zero_digit,
         respondent_class: 'respondent_class',
-        respondent_id: Faker::Number.non_zero_digit
+        respondent_id: Faker::Number.non_zero_digit,
+        touchpoint: 'realtor_feedback'
     }
   }
 
