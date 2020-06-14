@@ -30,9 +30,9 @@ RSpec.describe PromoterScoresController do
 
     context "fail" do
       def test_value_not_present(attribute)
-        no_attribute_params = valid_params.deep_dup
-        no_attribute_params.fetch(:promoter_score).delete(attribute)
-        post :create, params: no_attribute_params
+        old_value = valid_params.fetch(:promoter_score).delete(attribute)
+        post :create, params: valid_params
+        valid_params[attribute] = old_value
         expect(response.code).to eql('400')
       end
 
