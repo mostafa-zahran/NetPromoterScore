@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_14_081708) do
+ActiveRecord::Schema.define(version: 2020_06_14_124735) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 2020_06_14_081708) do
     t.datetime "updated_at", null: false
     t.index ["object_class", "object_id"], name: "index_promoter_scores_on_object_class_and_object_id"
     t.index ["respondent_class", "respondent_id"], name: "index_promoter_scores_on_respondent_class_and_respondent_id"
+    t.index ["respondent_id", "respondent_class", "object_id", "object_class", "touchpoint"], name: "promoter_scores_record_uniqness", unique: true
   end
 
 end
