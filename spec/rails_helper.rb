@@ -64,3 +64,7 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
   config.include FactoryGirl::Syntax::Methods
 end
+
+def json_response
+  JSON.parse(response.body).symbolize_keys
+end
