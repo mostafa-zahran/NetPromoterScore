@@ -7,7 +7,7 @@ class SellingTransactions::ValidateSellingTransactionPresence
 
   def self.call(params)
     #dummy logic to simulate the validation process
-    return true if respondent_valid?(params) && agent_valid?(params)
+    return true if respondent_valid?(params) && agent_valid?(params) && params[:touchpoint].present?
     raise SellingTransactionNotPresent
   end
 

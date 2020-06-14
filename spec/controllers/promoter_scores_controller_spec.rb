@@ -43,7 +43,7 @@ RSpec.describe PromoterScoresController do
 
       it 'has no touchpoint' do
         test_value_not_present(:touchpoint)
-        expect(json_response[:error]).to eql("Validation failed: Touchpoint has invalid value.")
+        expect(json_response[:error]).to eql("Selling Transaction not found")
       end
 
       it 'has no object_class' do
